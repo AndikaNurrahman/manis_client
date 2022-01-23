@@ -25,7 +25,7 @@ class Tagihan extends MY_Controller
 		$this->load->library('session');
 		$this->load->database();
 	}
-	public function print()
+	public function index()
 	{
 		if ($_SESSION['role'] != 1) {
 			return redirect('/users');
@@ -54,7 +54,7 @@ class Tagihan extends MY_Controller
 		$this->load->view('/_template/navbar', $data);
 		$this->load->view('/_template/sidebar', $data);
 
-		$this->load->view('/tagihan/print', $data);
+		$this->load->view('/tagihan/index', $data);
 
 		$this->load->view('/_template/footer');
 	}
@@ -91,9 +91,6 @@ class Tagihan extends MY_Controller
 
 	function add()
 	{
-		if ($_SESSION['role'] != 1) {
-			return redirect('/users');
-		}
 
 		if ($this->input->post('id') == "") {
 			redirect('tagihan');
@@ -130,10 +127,10 @@ class Tagihan extends MY_Controller
 				];
 				$input = $this->db->insert('aktifasi', $datas);
 				$this->session->set_flashdata('message', 'Data Tersimpan');
-				redirect('pembayaran');
+				redirect('tagihan');
 			} else {
 				$this->session->set_flashdata('message', 'Data Tidak Tersimpan');
-				redirect('pembayaran');
+				redirect('tagihan');
 			}
 		}
 	}

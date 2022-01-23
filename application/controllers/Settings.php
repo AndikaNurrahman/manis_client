@@ -37,12 +37,20 @@ class Settings extends MY_Controller
 		$ip = $_SESSION['mkipadd'];
 		$mkuser = $_SESSION['mkuser'];
 		$mkpass = $_SESSION['mkpassword'];
-		$apiwa = $this->db->get_where('settings', ['apiwa' => '1'])->row();
+		
+		$sett = $this->db->get('settings');
+		foreach($sett->result() as $bas){
+	$apiwa = $bas->apiwa;
+	$apimd = $bas->apimd;
+	$apipp = $bas->apipp;
+	
+};
+
+
 
 		if ($role  == 1) {
 			$this->db->where('user_name', $user);
-			$query1 = $this->db->get('users
-			');
+			$query1 = $this->db->get('users');
 		}
 		$this->db->where('nama', $user);
 		$query1 = $this->db->get('pelanggan
@@ -129,18 +137,27 @@ class Settings extends MY_Controller
 
 	function changePassword()
 	{
-		
-		if (empty($_POST('chgpassword'))) {
+		$this->load->library('form_validation');
+	
+		$this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
+		$this->form_validation->set_rules('passconf', 'Password Confirmation', 'required|matches[password]');    
+		if ($this->form_validation->run() == false) {
+			$this->session->set_flashdata('message', 'password tidak sesuai atau password udah terpakai');
+			redirect('/settings');
+		  } else {
+		if (empty($this->input->post('password'))) {
 			$this->session->set_flashdata('message', 'tidak ada data !');
+			redirect('/settings');
 		}
-		$chgpass = $this->input->post('chgpassword');
+		$chgpass = $this->input->post('password');
 		$userpass = password_hash($chgpass, PASSWORD_DEFAULT);
 		$this->db->set('user_password', $userpass);
 		$this->db->where('user_id', 1);
 		$this->db->update('users');
 
-
-		redirect('/dashboard');
+		$this->session->set_flashdata('message', 'Password Telah Diperbaharui!');
+		redirect('/settings');
+	}
 	}
 
 	function changeImage()

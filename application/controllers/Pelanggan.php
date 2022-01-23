@@ -48,7 +48,6 @@ class Pelanggan extends MY_Controller
 
 		$this->db->select('*');
 		$this->db->join('paket', 'pelanggan.paket = paket.paket_id');
-	
 		$query1 = $this->db->get('pelanggan');
 
 		$paket = $this->db->get('paket');

@@ -39,7 +39,7 @@ class Pembayaran extends MY_Controller
 		$user = $_SESSION['user_name'];
 		$user_image = $_SESSION['user_image'];
 
-
+		$this->db->where('status_code', '1');
 		$query = $this->db->get('tagihan');
 
 		$data['tagihan'] = $query;
@@ -47,11 +47,37 @@ class Pembayaran extends MY_Controller
 
 		$data['user'] = $user;
 		$data['user_image'] = $user_image;
-		$data['title'] = 'Tagihan';
+		$data['title'] = 'Sudah Lunas';
 		$this->load->view('/_template/header', $data);
 		$this->load->view('/_template/navbar', $data);
 		$this->load->view('/_template/sidebar', $data);
 		$this->load->view('/pembayaran/index', $data);
+		$this->load->view('/_template/footer');
+	}
+	public function belum()
+	{
+		
+		if ($_SESSION['role'] != 1) {
+			return redirect('/users');
+		}
+
+		$API = new Mikweb();
+		$user = $_SESSION['user_name'];
+		$user_image = $_SESSION['user_image'];
+
+		$this->db->where('status_code', '0');
+		$query = $this->db->get('tagihan');
+
+		$data['tagihan'] = $query;
+
+
+		$data['user'] = $user;
+		$data['user_image'] = $user_image;
+		$data['title'] = 'Belum Lunas';
+		$this->load->view('/_template/header', $data);
+		$this->load->view('/_template/navbar', $data);
+		$this->load->view('/_template/sidebar', $data);
+		$this->load->view('/pembayaran/belum', $data);
 		$this->load->view('/_template/footer');
 	}
 
@@ -63,6 +89,10 @@ class Pembayaran extends MY_Controller
 
 		$id = $this->input->post('id');
 		$pembayaran = $this->input->post('pembayaran');
+		$periode = date('F Y');
+		$paket = $this->input->post('paket');
+		$user = $this->input->post('admin');
+		$tarif = $this->input->post('tarif');
 		$phone = $this->input->post('nomor');
 		$message = $this->db->get_where('text', ['text_id' => '3'])->row_array();
 		$this->db->where('tagihan_id', $id);
@@ -72,7 +102,13 @@ class Pembayaran extends MY_Controller
 		if ($test) {
 			//$token = $this->db->get_where('settings', ['apiwa' => '1'])->row_array();
 			//Apiwa($phone, $message, $token);
-			$this->session->set_flashdata('message', 'Sudah Terbayar Melalui Admin');
+			$data = [
+                'nama' => 'Pemasukan Tagihan Wifi  '.$paket.' periode '.$periode.' melalui admin '.$user.'',
+                'tarif' => $tarif,
+                'keterangan' => 'Pemasukan'
+	];
+            $input = $this->db->insert('transaksi', $data);
+			$this->session->set_flashdata('message', 'Sudah Terbayar Melalui Admin '.$user.'');
 			redirect('pembayaran', 'refresh');
 		}
 	}

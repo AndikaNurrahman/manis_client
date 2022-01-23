@@ -258,7 +258,7 @@
                                              <input type="hidden" id="no" name="no" value="<?php echo $tg->no_pelanggan; ?>">
                                              <input type="hidden" name="result_type" id="result-type" value="">
                                              <input type="hidden" name="result_data" id="result-data" value="">
-                                             <input type="hidden" id="nama" name="nama" value="<?php echo $tg->nama_pelanggan; ?>">
+                                             <input type="hidden" id="nama" name="name" value="<?php echo $tg->nama_pelanggan; ?>">
                                              <submit id="pay-button" class="btn btn-danger">Pay!</submit>
                                          </form>
 

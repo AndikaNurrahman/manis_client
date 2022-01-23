@@ -86,6 +86,7 @@
 			for ($bulan = 1; $bulan < 13; $bulan++) {
 				$this->db->select_sum('tarif_inv');
 				$this->db->where('month(tanggal)', $bulan);
+				$this->db->where('year(tanggal)', date('y'));
 				$this->db->where('status_code', '1');
 				$ch = $this->db->get('tagihan');
 				foreach ($ch->result_array() as $row) {
@@ -102,16 +103,19 @@
 			}
 
 			$this->db->where('status_code', '1');
+			$this->db->where('year(tanggal)', date('y'));
 			$this->db->where('month(tanggal)', date('m'));
 			$lunass = $this->db->get('tagihan');
 			$lunas = $lunass->num_rows();
 
 			$this->db->where('status_code', '0');
+			$this->db->where('year(tanggal)', date('y'));
 			$this->db->where('month(tanggal)', date('m'));
 			$belums = $this->db->get('tagihan');
 			$belum = $belums->num_rows();
 
 			$this->db->where('status_code', '201');
+			$this->db->where('year(tanggal)', date('y'));
 			$this->db->where('month(tanggal)', date('m'));
 			$pendings = $this->db->get('tagihan');
 			$pending = $pendings->num_rows();
@@ -122,9 +126,11 @@
 
 			$this->db->select_sum('tarif');
 			$this->db->where('keterangan', 'Pengeluaran');
+			$this->db->where('year(tanggal)', date('y'));
 			$transaksis = $this->db->get('transaksi');
 			$transaksi = $transaksis->result_array();
 			$this->db->select_sum('tarif_inv');
+			$this->db->where('year(tanggal)', date('y'));
 			$tagi = $this->db->get('tagihan');
 			$tagihanpertahun = 	$tagi->result_array();
 

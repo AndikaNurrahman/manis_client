@@ -1,5 +1,5 @@
    <!--  BEGIN CONTENT AREA  -->
-
+   <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/plugins/table/datatable/datatables.css">
    <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/plugins/table/datatable/dt-global_style.css">
 
    <div id="content" class="main-content">

@@ -657,7 +657,7 @@ var options1 = {
     height: 365,
     type: 'area',
     zoom: {
-        enabled: true
+        enabled: false
     },
     dropShadow: {
       enabled: true,
@@ -728,7 +728,7 @@ var options1 = {
   }]
   },
   subtitle: {
-    text: 'Totioasdnfaklal Profi',
+    text: 'dark',
     align: 'left',
     margin: 0,
     offsetX: -10,
@@ -925,7 +925,7 @@ var options = {
             total: {
               show: true,
               showAlways: true,
-              label: 'Total',
+              label: 'Totaldd',
               color: '#888ea8',
               formatter: function (w) {
                 return w.globals.seriesTotals.reduce( function(a, b) {

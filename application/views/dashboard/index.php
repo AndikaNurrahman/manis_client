@@ -26,29 +26,29 @@
             <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                 <div class="widget widget-one">
                     <div class="widget-heading">
-                        <h6 class="w-title">Keuangan</h6>
+                        <h6 class="">Pemasukan Pertahun</h6>
                     </div>
-                    <p class="w-stats">RP. <?php $jumlah = $pertahun['0']['tarif_inv']-$transaksi['0']['tarif']; $total = number_format($jumlah, 2, ',', '.');
-                                                        echo $total; ?></p>
                     <div class="w-chart">
                         <div class="w-chart-section">
                             <div class="w-detail">
-                           
-                                <h5>Total Pemasukan</h5>
-                                <p class="inv-balance" style="color: green">RP. <?php $pemasukan = number_format($pertahun['0']['tarif_inv'], 2, ',', '.');
+                                <p class="w-title">Total Pemasukan</p>
+                                <p class="w-stats">RP. <?php $pemasukan = number_format($pertahun['0']['tarif_inv'], 2, ',', '.');
                                                         echo $pemasukan; ?></p>
                             </div>
-                           
+                            <div class="w-chart-render-one">
+                                <div id="total-users"></div>
+                            </div>
                         </div>
 
                         <div class="w-chart-section">
                             <div class="w-detail">
-                                <h5>Total Pengeluaran</h5>
-                                <p class="inv-balance" style="color: red">RP. <?php $pengeluaran = number_format($transaksi['0']['tarif'], 2, ',', '.');
+                                <p class="w-title">Total Pengeluaran</p>
+                                <p class="w-stats">RP. <?php $pengeluaran = number_format($transaksi['0']['tarif'], 2, ',', '.');
                                                         echo $pengeluaran; ?></p>
                             </div>
-                          
-                            
+                            <div class="w-chart-render-one">
+                                <div id="paid-visits"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -59,9 +59,9 @@
                     <div class="widget-content">
                         <div class="account-box">
                             <div class="info">
-                                <h5 class="">Pendapatan Pertahun</h5>
-                                <p class="inv-balance">RP. <?= number_format($jml, 2, ',', '.');
-                                                        ?></p>
+                                <h5 class="">RP. <?php $bulanini = number_format($tagihan, 2, ',', '.');
+                                                            echo $bulanini; ?></h5>
+                                <p class="inv-balance">Pendapatan Periode <?php echo format_indo(date('Y-m')); ?>  </p>
                             </div>
                             <div class="acc-action">
                                 <div class="">
@@ -74,7 +74,7 @@
                                             <line x1="1" y1="10" x2="23" y2="10"></line>
                                         </svg></a>
                                 </div>
-                                <a href="javascript:void(0);">Keuangan</a>
+                                <a href="javascript:void(0);">Upgrade</a>
                             </div>
                         </div>
                     </div>
@@ -86,10 +86,10 @@
                     <div class="widget-content">
                         <div class="w-content">
                             <div class="w-info">
-                                <h6 class="value">Pendapatan</h6>
-                                <p class=""> perbulan</p>
-                                <p class="inv-balance">RP. <?php $bulanini = number_format($tagihan, 2, ',', '.');
-                                                            echo $bulanini; ?></p>
+                                <h6 class="value">RP. <?= number_format($jml, 2, ',', '.');
+                                                        ?></h6>
+                                <p class=""></p>
+                                <p class="">Target Pendapatan Perbulan</p>
                             </div>
                             <div class="">
                                 <div class="w-icon">
@@ -561,36 +561,36 @@ $label = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agust
         series: [<?php echo json_encode($IPSTATIC); ?>, <?php echo json_encode($PPPOE); ?>],
         labels: ['IPSTATIC', 'PPPOE'],
         responsive: [{
-        breakpoint: 1599,
-        options: {
-            chart: {
-                width: '350px',
-                height: '400px'
-            },
-            legend: {
-                position: 'bottom'
-            }
-        },
-
-        breakpoint: 1439,
-        options: {
-            chart: {
-                width: '250px',
-                height: '390px'
-            },
-            legend: {
-                position: 'bottom'
-            },
-            plotOptions: {
-              pie: {
-                donut: {
-                  size: '65%',
+            breakpoint: 1599,
+            options: {
+                chart: {
+                    width: '350px',
+                    height: '300px'
+                },
+                legend: {
+                    position: 'bottom'
                 }
-              }
-            }
-        },
-    }]
-}
+            },
+
+            breakpoint: 1439,
+            options: {
+                chart: {
+                    width: '150px',
+                    height: '290px'
+                },
+                legend: {
+                    position: 'bottom'
+                },
+                plotOptions: {
+                    pie: {
+                        donut: {
+                            size: '65%',
+                        }
+                    }
+                }
+            },
+        }]
+    }
     var chart = new ApexCharts(
         document.querySelector("#charet"),
         options

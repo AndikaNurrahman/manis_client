@@ -129,7 +129,7 @@
                                                            </svg></a>
                                                    </li>
                                                    <li>
-                                                       <a href="https://api.whatsapp.com/send?phone=<?= $baris->no_pelanggan; ?>&text=<?php  $sms = "Dear Customer%0AReminder%0A
+                                                       <a target="_blank" href="https://api.whatsapp.com/send?phone=<?= $baris->no_pelanggan; ?>&text=<?php  $sms = "Dear Customer%0AReminder%0A
 Kami dari Balinet-Hotspot%0A
 Ingin konfirmasi pembayaran untuk tagihan periode " . date('F/Y/')  . " Apakah sudah ditransfer pembayarannya?%0A%0A
 Jika sudah membayarkan tagihannya, mohon abaikan konfirmasi ini.%0A
